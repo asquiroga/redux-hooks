@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector, shallowEqual } from "react-redux"
 
 function App() {
   const dispatch = useDispatch();
-  const counter = useSelector(state => state.counter);
-  const name = useSelector(state => state.name)
-  const listSize = useSelector(state => state.list.length);
-  const objectKeys = useSelector(state => Object.keys(state.object));
+  const counter = useSelector(state => state.counter, shallowEqual);
+  const name = useSelector(state => state.name, shallowEqual)
+  const listSize = useSelector(state => state.list.length, shallowEqual);
+  const objectKeys = useSelector(state => Object.keys(state.object), shallowEqual);
   return (
     <div className="App">
       Counter : {counter} <br></br>
@@ -18,7 +18,8 @@ function App() {
       <div>
         <input type="button" value="+" onClick={() => dispatch({type: "INCREMENT"})}/>
         <input type="button" value="-" onClick={() => dispatch({type: "DECREMENT"})}/>
-        <input type="button" value="equal" onClick={() => dispatch({type: "EQUAL"})}/>
+        <input type="button" value="equal (new ref)" onClick={() => dispatch({type: "EQUAL"})}/>
+        <input type="button" value="equal (same ref)" onClick={() => dispatch({type: "EQUAL_SAME_REF"})}/>
         <input type="button" value="New Name" onClick={() => dispatch({type: "NEW_NAME", payload: "Peter"})}/>
       </div>
 

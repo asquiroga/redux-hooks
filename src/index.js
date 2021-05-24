@@ -15,7 +15,9 @@ const rootReducer = (state = { counter: 0, name: "", list: [], object: {} }, act
       return { ...state, counter: state.counter - 1}
     case 'EQUAL':
         return { ...state }
-    case 'NEW_NAME':
+    case 'EQUAL_SAME_REF':
+        return state
+      case 'NEW_NAME':
       return { ...state, name: action.payload }
     case 'NEW_ITEM_LIST':
         return { ...state, list: [...state.list, "newItem"] }
@@ -25,7 +27,7 @@ const rootReducer = (state = { counter: 0, name: "", list: [], object: {} }, act
         return { ...state, object:  { ...state.object } }
     case 'NEW_KEY_OBJECT':
         return { ...state, object:  { ...state.object, name: "John" } }
-      default:
+    default:
         return state
   }
 }
