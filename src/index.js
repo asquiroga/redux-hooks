@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const rootReducer = (state = { counter: 0, name: "" }, action) => {
+const rootReducer = (state = { counter: 0, name: "", list: [] }, action) => {
   
   switch (action.type) {
     case 'INCREMENT':
@@ -17,8 +17,12 @@ const rootReducer = (state = { counter: 0, name: "" }, action) => {
         return { ...state }
     case 'NEW_NAME':
       return { ...state, name: action.payload }
+    case 'NEW_ITEM_LIST':
+        return { ...state, list: [...state.list, "newItem"] }
+    case 'SAME_LIST':
+        return { ...state, list: [ ...state.list ] }
     default:
-    return state
+        return state
   }
 }
 
